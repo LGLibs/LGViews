@@ -9,12 +9,7 @@ Classes extends abilities of UILabel, UIButton, UITextField and UITextView.
 
 ## Preview
 
-<img src="https://raw.githubusercontent.com/LGLibs/ReadmeFiles/master/LGViews/Preview.gif" width="218"/>
-<img src="https://raw.githubusercontent.com/LGLibs/ReadmeFiles/master/LGViews/1.png" width="218"/>
-<img src="https://raw.githubusercontent.com/LGLibs/ReadmeFiles/master/LGViews/2.png" width="218"/>
-<img src="https://raw.githubusercontent.com/LGLibs/ReadmeFiles/master/LGViews/3.png" width="218"/>
-<img src="https://raw.githubusercontent.com/LGLibs/ReadmeFiles/master/LGViews/4.png" width="218"/>
-<img src="https://raw.githubusercontent.com/LGLibs/ReadmeFiles/master/LGViews/5.png" width="218"/>
+<img src="https://raw.githubusercontent.com/LGLibs/ReadmeFiles/master/LGViews/Preview.gif" width="218"/> <img src="https://raw.githubusercontent.com/LGLibs/ReadmeFiles/master/LGViews/1.png" width="218"/> <img src="https://raw.githubusercontent.com/LGLibs/ReadmeFiles/master/LGViews/2.png" width="218"/> <img src="https://raw.githubusercontent.com/LGLibs/ReadmeFiles/master/LGViews/3.png" width="218"/> <img src="https://raw.githubusercontent.com/LGLibs/ReadmeFiles/master/LGViews/4.png" width="218"/> <img src="https://raw.githubusercontent.com/LGLibs/ReadmeFiles/master/LGViews/5.png" width="218"/>
 
 ## Installation
 
