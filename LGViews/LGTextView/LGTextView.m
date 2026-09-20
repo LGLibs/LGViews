@@ -1,30 +1,9 @@
 //
-//  LGTextView.m
-//  LGViews
+// LGTextView.m
+// LGViews
 //
-//
-//  The MIT License (MIT)
-//
-//  Copyright (c) 2015 Grigory Lutkov <Friend.LGA@gmail.com>
-//  (https://github.com/Friend-LGA/LGViews)
-//
-//  Permission is hereby granted, free of charge, to any person obtaining a copy
-//  of this software and associated documentation files (the "Software"), to deal
-//  in the Software without restriction, including without limitation the rights
-//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-//  copies of the Software, and to permit persons to whom the Software is
-//  furnished to do so, subject to the following conditions:
-//
-//  The above copyright notice and this permission notice shall be included in all
-//  copies or substantial portions of the Software.
-//
-//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-//  SOFTWARE.
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2015 Grigorii Lutkov <grigorii@lutkov.dev>
 //
 
 #import "LGTextView.h"
@@ -82,17 +61,17 @@ static CGFloat const kResizeAnimationDuration = 0.15f;
 {
     _mainTextColor = [UIColor blackColor];
     _placeholderColor = [UIColor lightGrayColor];
-    
+
     _numberOfLinesMin = 0;
     _numberOfLinesMax = 0;
     _heightMin = 0.f;
     _heightMax = 0.f;
-    
+
     _animatedResize = YES;
-    
+
     _delegateObject = [LGTextViewDelegateObject new];
     [super setDelegate:_delegateObject];
-    
+
     self.alwaysBounceVertical = NO;
 }
 
@@ -109,7 +88,7 @@ static CGFloat const kResizeAnimationDuration = 0.15f;
 - (void)setTextColor:(UIColor *)textColor
 {
     _mainTextColor = textColor;
-    
+
     if (!self.isPlaceholderShowing)
         [super setTextColor:_mainTextColor];
 }
@@ -120,7 +99,7 @@ static CGFloat const kResizeAnimationDuration = 0.15f;
     {
         if (_numberOfLinesMin) self.numberOfLinesMin = _numberOfLinesMin;
         if (_numberOfLinesMax) self.numberOfLinesMax = _numberOfLinesMax;
-        
+
         [super setFont:font];
     }
 }
@@ -130,24 +109,24 @@ static CGFloat const kResizeAnimationDuration = 0.15f;
     if (_heightMin || _heightMax)
     {
         CGSize selfSize = [super sizeThatFits:size];
-        
+
         selfSize.width = size.width;
-        
+
         if (_heightMin && selfSize.height < _heightMin)
         {
             selfSize.height = _heightMin;
-            
+
             self.scrollEnabled = NO;
         }
         else if (_heightMax && selfSize.height > _heightMax)
         {
             selfSize.height = _heightMax;
-            
+
             self.scrollEnabled = YES;
         }
         else
             self.scrollEnabled = NO;
-        
+
         return selfSize;
     }
     else return [super sizeThatFits:size];
@@ -160,7 +139,7 @@ static CGFloat const kResizeAnimationDuration = 0.15f;
     if (![_placeholder isEqualToString:placeholder])
     {
         _placeholder = placeholder;
-        
+
         if (!self.text.length)
             [self placeholderShow];
     }
@@ -169,7 +148,7 @@ static CGFloat const kResizeAnimationDuration = 0.15f;
 - (void)setPlaceholderColor:(UIColor *)placeholderColor
 {
     _placeholderColor = placeholderColor;
-    
+
     if (self.isPlaceholderShowing)
         [super setTextColor:_placeholderColor];
 }
@@ -179,7 +158,7 @@ static CGFloat const kResizeAnimationDuration = 0.15f;
     if (_placeholder)
     {
         _placeholderShowing = YES;
-        
+
         [super setTextColor:_placeholderColor];
         [super setText:_placeholder];
     }
@@ -190,7 +169,7 @@ static CGFloat const kResizeAnimationDuration = 0.15f;
     if (_placeholder)
     {
         _placeholderShowing = NO;
-        
+
         [super setTextColor:_mainTextColor];
         [super setText:@""];
     }
@@ -201,14 +180,14 @@ static CGFloat const kResizeAnimationDuration = 0.15f;
 - (void)setNumberOfLinesMin:(NSUInteger)numberOfLinesMin
 {
     _numberOfLinesMin = numberOfLinesMin;
-    
+
     self.heightMin = self.font.lineHeight*_numberOfLinesMin+self.contentInset.top+self.contentInset.bottom+([UIDevice currentDevice].systemVersion.floatValue >= 7.0 ? self.textContainerInset.top+self.textContainerInset.bottom : 0.f);
 }
 
 - (void)setNumberOfLinesMax:(NSUInteger)numberOfLinesMax
 {
     _numberOfLinesMax = numberOfLinesMax;
-    
+
     self.heightMax = self.font.lineHeight*_numberOfLinesMax+self.contentInset.top+self.contentInset.bottom+([UIDevice currentDevice].systemVersion.floatValue >= 7.0 ? self.textContainerInset.top+self.textContainerInset.bottom : 0.f);
 }
 
@@ -217,7 +196,7 @@ static CGFloat const kResizeAnimationDuration = 0.15f;
     if (_heightMin != heightMin)
     {
         _heightMin = heightMin;
-        
+
         [self sizeToFit];
         [self layoutIfNeeded];
     }
@@ -229,7 +208,7 @@ static CGFloat const kResizeAnimationDuration = 0.15f;
     if (_heightMax != heightMax)
     {
         _heightMax = heightMax;
-        
+
         [self sizeToFit];
         [self layoutIfNeeded];
     }
@@ -273,18 +252,18 @@ static CGFloat const kResizeAnimationDuration = 0.15f;
         CGRect frameNew = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, sizeTemp.height);
         if ([UIScreen mainScreen].scale == 1.f) frameNew = CGRectIntegral(frameNew);
         CGSize sizeNew = frameNew.size;
-        
+
         if (!CGSizeEqualToSize(sizeOld, sizeNew))
         {
             [_delegateObject textViewWillResize:self toSize:sizeNew];
-            
+
             if (_animatedResize)
             {
                 [UIView animateWithDuration:kResizeAnimationDuration
                                  animations:^(void)
                  {
                      self.frame = frameNew;
-                     
+
                      [_delegateObject textViewResizing:self toSize:sizeNew];
                  }
                                  completion:^(BOOL finished)
@@ -295,9 +274,9 @@ static CGFloat const kResizeAnimationDuration = 0.15f;
             else
             {
                 self.frame = frameNew;
-                
+
                 [_delegateObject textViewResizing:self toSize:sizeNew];
-                
+
                 [_delegateObject textViewDidResize:self];
             }
         }

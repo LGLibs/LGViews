@@ -200,7 +200,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0710;
-				ORGANIZATIONNAME = "Grigory Lutkov";
+				ORGANIZATIONNAME = "Grigorii Lutkov";
 				TargetAttributes = {
 					4AF139D41BF385120037B073 = {
 						CreatedOnToolsVersion = 7.1.1;
@@ -353,7 +353,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Friend-LGA.LGViewsFramework";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.LGLibs.LGViewsFramework";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -371,7 +371,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Friend-LGA.LGViewsFramework";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.LGLibs.LGViewsFramework";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};

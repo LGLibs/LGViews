@@ -1,9 +1,9 @@
 //
-//  AppDelegate.m
-//  LGViewsDemo
+// AppDelegate.m
+// LGViewsDemo
 //
-//  Created by Grigory Lutkov on 06.03.15.
-//  Copyright (c) 2015 Grigory Lutkov. All rights reserved.
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2015 Grigorii Lutkov <grigorii@lutkov.dev>
 //
 
 #import "AppDelegate.h"
@@ -20,12 +20,12 @@
 {
     TableViewController *tableViewController = [TableViewController new];
     NavigationController *navigationController = [[NavigationController alloc] initWithRootViewController:tableViewController];
-    
+
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.rootViewController = navigationController;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    
+
     return YES;
 }
 

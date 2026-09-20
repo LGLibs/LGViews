@@ -1,9 +1,9 @@
 //
-//  LGViewsFramework.h
-//  LGViewsFramework
+// LGViewsFramework.h
+// LGViewsFramework
 //
-//  Created by Grigory Lutkov on 11.11.15.
-//  Copyright © 2015 Grigory Lutkov. All rights reserved.
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2015 Grigorii Lutkov <grigorii@lutkov.dev>
 //
 
 #import <UIKit/UIKit.h>

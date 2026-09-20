@@ -1,9 +1,9 @@
 //
-//  ViewController.m
-//  LGRadioButtonsViewDemo
+// ViewController.m
+// LGRadioButtonsViewDemo
 //
-//  Created by Grigory Lutkov on 27.03.15.
-//  Copyright (c) 2015 Grigory Lutkov. All rights reserved.
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2015 Grigorii Lutkov <grigorii@lutkov.dev>
 //
 
 #import "RadioButtonsViewController.h"
@@ -26,17 +26,17 @@
     if (self)
     {
         self.title = @"LGRadioButtonsView";
-        
+
         // -----
-        
+
         _scrollView = [UIScrollView new];
         _scrollView.backgroundColor = [UIColor whiteColor];
         [self.view addSubview:_scrollView];
-        
+
         UIImage *circleImageNormal = [UIImage imageNamed:@"Circle_Normal"];
-        
+
         UIImage *circleImageHighlighted = [UIImage imageNamed:@"Circle_Selected"];
-        
+
         _radioButtons1 = [[LGRadioButtonsView alloc] initWithNumberOfButtons:3
                                                      actionHandler:^(LGRadioButtonsView *radioButtonsView, NSString *title, NSUInteger index)
                             {
@@ -52,9 +52,9 @@
         [_radioButtons1 setButtonsAdjustsImageWhenHighlighted:NO];
         [_radioButtons1 setButtonsContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
         [_scrollView addSubview:_radioButtons1];
-        
+
         // -----
-        
+
         _radioButtons2 = [[LGRadioButtonsView alloc] initWithNumberOfButtons:3
                                                                actionHandler:^(LGRadioButtonsView *radioButtonsView, NSString *title, NSUInteger index)
                           {
@@ -71,9 +71,9 @@
         [_radioButtons2 setButtonsImage:circleImageHighlighted forState:UIControlStateSelected];
         [_radioButtons2 setButtonsAdjustsImageWhenHighlighted:NO];
         [_scrollView addSubview:_radioButtons2];
-        
+
         // -----
-        
+
         _radioButtons3 = [[LGRadioButtonsView alloc] initWithNumberOfButtons:3
                                                                actionHandler:^(LGRadioButtonsView *radioButtonsView, NSString *title, NSUInteger index)
                           {
@@ -104,26 +104,26 @@
 - (void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
-    
+
     _scrollView.frame = CGRectMake(0.f, 0.f, self.view.frame.size.width, self.view.frame.size.height);
-    
+
     CGFloat shift = 10.f;
-    
+
     CGSize radioButtonsSize1 = [_radioButtons1 sizeThatFits:CGSizeMake(self.view.frame.size.width-shift*2, CGFLOAT_MAX)];
     CGRect radioButtonsFrame1 = CGRectMake(shift, shift, radioButtonsSize1.width, radioButtonsSize1.height);
     radioButtonsFrame1 = CGRectIntegral(radioButtonsFrame1);
     _radioButtons1.frame = radioButtonsFrame1;
-    
+
     CGSize radioButtonsSize2 = [_radioButtons2 sizeThatFits:CGSizeMake(self.view.frame.size.width-shift*2, CGFLOAT_MAX)];
     CGRect radioButtonsFrame2 = CGRectMake(shift, _radioButtons1.frame.origin.y+_radioButtons1.frame.size.height+shift, radioButtonsSize2.width, radioButtonsSize2.height);
     radioButtonsFrame2 = CGRectIntegral(radioButtonsFrame2);
     _radioButtons2.frame = radioButtonsFrame2;
-    
+
     CGSize radioButtonsSize3 = [_radioButtons3 sizeThatFits:CGSizeMake((self.view.frame.size.width-shift*2)/2, CGFLOAT_MAX)];
     CGRect radioButtonsFrame3 = CGRectMake(shift, _radioButtons2.frame.origin.y+_radioButtons2.frame.size.height+shift, radioButtonsSize3.width, radioButtonsSize3.height);
     radioButtonsFrame3 = CGRectIntegral(radioButtonsFrame3);
     _radioButtons3.frame = radioButtonsFrame3;
-    
+
     _scrollView.contentSize = CGSizeMake(_scrollView.frame.size.width, _radioButtons3.frame.origin.y+_radioButtons3.frame.size.height+shift);
 }
 

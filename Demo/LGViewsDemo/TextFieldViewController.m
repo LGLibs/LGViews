@@ -1,9 +1,9 @@
 //
-//  TextFieldViewController.m
-//  LGViewsDemo
+// TextFieldViewController.m
+// LGViewsDemo
 //
-//  Created by Grigory Lutkov on 14.03.15.
-//  Copyright (c) 2015 Grigory Lutkov. All rights reserved.
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2015 Grigorii Lutkov <grigorii@lutkov.dev>
 //
 
 #import "TextFieldViewController.h"
@@ -28,22 +28,22 @@
     if (self)
     {
         self.title = @"LGTextField";
-        
+
         _scrollView = [UIScrollView new];
         _scrollView.backgroundColor = [UIColor whiteColor];
         _scrollView.alwaysBounceVertical = YES;
         [self.view addSubview:_scrollView];
-        
+
         UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(gestureAction)];
         gesture.delegate = self;
         [_scrollView addGestureRecognizer:gesture];
-        
+
         // -----
 
         UIColor *grayColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1.f];
-        
+
         CGFloat inset = 10.f;
-        
+
         _textField1 = [LGTextField new];
         _textField1.placeholder = @"TextField 1 placeholder";
         _textField1.backgroundColor = grayColor;
@@ -55,7 +55,7 @@
         _textField1.trimmingWhitespaceAndNewline = YES;
         _textField1.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
         [_scrollView addSubview:_textField1];
-        
+
         _textField2 = [LGTextField new];
         _textField2.placeholder = @"TextField 2 placeholder";
         _textField2.backgroundColor = grayColor;
@@ -70,7 +70,7 @@
         _textField2.trimmingWhitespaceAndNewline = YES;
         _textField2.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
         [_scrollView addSubview:_textField2];
-        
+
         _textField3 = [LGTextField new];
         _textField3.placeholder = @"TextField 3 placeholder";
         _textField3.backgroundColor = grayColor;
@@ -85,7 +85,7 @@
         _textField3.trimmingWhitespaceAndNewline = YES;
         _textField3.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
         [_scrollView addSubview:_textField3];
-        
+
         _textField4 = [LGTextField new];
         _textField4.placeholder = @"TextField 4 placeholder";
         _textField4.backgroundColor = grayColor;
@@ -100,9 +100,9 @@
         _textField4.trimmingWhitespaceAndNewline = YES;
         _textField4.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
         [_scrollView addSubview:_textField4];
-        
+
         // -----
-        
+
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardShowHideAction:) name:UIKeyboardWillShowNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardShowHideAction:) name:UIKeyboardWillHideNotification object:nil];
     }
@@ -115,7 +115,7 @@
     imageView.clipsToBounds = YES;
     imageView.contentMode = UIViewContentModeScaleToFill;
     imageView.frame = CGRectMake(0.f, 0.f, 30.f, 30.f);
-    
+
     return imageView;
 }
 
@@ -124,7 +124,7 @@
 - (void)dealloc
 {
     NSLog(@"%s [Line %d]", __PRETTY_FUNCTION__, __LINE__);
-    
+
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
@@ -134,31 +134,31 @@
 - (void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
-    
+
     _scrollView.frame = CGRectMake(0.f, 0.f, self.view.frame.size.width, self.view.frame.size.height);
-    
+
     // -----
-    
+
     CGFloat shift = 10.f;
     CGFloat height = 44.f;
-    
+
     CGFloat topInset = 0.f;
     if ([UIDevice currentDevice].systemVersion.floatValue >= 7.0)
     {
         topInset += (self.navigationController.navigationBarHidden ? 0.f : MIN(self.navigationController.navigationBar.frame.size.width, self.navigationController.navigationBar.frame.size.height));
         topInset += ([UIApplication sharedApplication].statusBarHidden ? 0.f : MIN([UIApplication sharedApplication].statusBarFrame.size.width, [UIApplication sharedApplication].statusBarFrame.size.height));
     }
-    
+
     _textField1.frame = CGRectIntegral(CGRectMake(shift, shift, self.view.frame.size.width-shift*2, height));
-    
+
     _textField2.frame = CGRectIntegral(CGRectMake(shift, _textField1.frame.origin.y+_textField1.frame.size.height+shift, self.view.frame.size.width-shift*2, height));
-    
+
     _textField3.frame = CGRectIntegral(CGRectMake(shift, _textField2.frame.origin.y+_textField2.frame.size.height+shift, self.view.frame.size.width-shift*2, height));
 
     _textField4.frame = CGRectIntegral(CGRectMake(shift, _scrollView.frame.size.height-topInset-shift-height, self.view.frame.size.width-shift*2, height));
-    
+
     // -----
-    
+
     _scrollView.contentSize = CGSizeMake(_scrollView.frame.size.width, _textField4.frame.origin.y+_textField4.frame.size.height+shift);
 }
 

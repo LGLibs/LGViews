@@ -1,30 +1,9 @@
 //
-//  LGRadioButtonsView.m
-//  LGViews
+// LGRadioButtonsView.m
+// LGViews
 //
-//
-//  The MIT License (MIT)
-//
-//  Copyright (c) 2015 Grigory Lutkov <Friend.LGA@gmail.com>
-//  (https://github.com/Friend-LGA/LGViews)
-//
-//  Permission is hereby granted, free of charge, to any person obtaining a copy
-//  of this software and associated documentation files (the "Software"), to deal
-//  in the Software without restriction, including without limitation the rights
-//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-//  copies of the Software, and to permit persons to whom the Software is
-//  furnished to do so, subject to the following conditions:
-//
-//  The above copyright notice and this permission notice shall be included in all
-//  copies or substantial portions of the Software.
-//
-//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-//  SOFTWARE.
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2015 Grigorii Lutkov <grigorii@lutkov.dev>
 //
 
 #import "LGRadioButtonsView.h"
@@ -43,21 +22,21 @@
     if (self)
     {
         self.backgroundColor = [UIColor clearColor];
-        
+
         NSMutableArray *buttons = [NSMutableArray new];
-        
+
         for (NSUInteger i=0; i<numberOfButtons; i++)
         {
             LGRadioButton *button = [LGRadioButton new];
             button.tag = i;
             [button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
             [self addSubview:button];
-            
+
             [buttons addObject:button];
         }
 
         _buttons = buttons;
-        
+
         _spaceBetweenButtons = 6.f;
     }
     return self;
@@ -122,29 +101,29 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    
+
     CGSize size = self.frame.size;
-    
+
     CGSize sizeToFit = CGSizeMake(size.width-(_contentEdgeInsets.left+_contentEdgeInsets.right), 0.f);
     if (sizeToFit.width < 0)
         sizeToFit.width = 0.f;
-    
+
     for (NSUInteger i=0; i<_buttons.count; i++)
     {
         LGRadioButton *button = _buttons[i];
-        
+
         CGSize buttonSize = [button sizeThatFits:sizeToFit];
         CGRect buttonFrame = CGRectZero;
-        
+
         if (i == 0)
             buttonFrame = CGRectMake(_contentEdgeInsets.left, _contentEdgeInsets.top, sizeToFit.width, buttonSize.height);
         else
         {
             LGRadioButton *buttonPrev = _buttons[i-1];
-            
+
             buttonFrame = CGRectMake(_contentEdgeInsets.left, buttonPrev.frame.origin.y+buttonPrev.frame.size.height+_spaceBetweenButtons, sizeToFit.width, buttonSize.height);
         }
-        
+
         if ([UIScreen mainScreen].scale == 1.f)
             buttonFrame = CGRectIntegral(buttonFrame);
         button.frame = buttonFrame;
@@ -156,22 +135,22 @@
     CGSize sizeToFit = CGSizeMake(size.width-(_contentEdgeInsets.left+_contentEdgeInsets.right), 0.f);
     if (sizeToFit.width < 0)
         sizeToFit.width = 0.f;
-    
+
     CGFloat width = 0.f;
     CGFloat height = 0.f;
-    
+
     for (LGRadioButton *button in _buttons)
     {
         CGSize buttonSize = [button sizeThatFits:sizeToFit];
-        
+
         height += buttonSize.height;
-        
+
         width = MAX(width, buttonSize.width);
     }
-    
+
     height += _spaceBetweenButtons*(_buttons.count-1)+(_contentEdgeInsets.top+_contentEdgeInsets.bottom);
     width += (_contentEdgeInsets.left+_contentEdgeInsets.right);
-    
+
     return CGSizeMake(width, height);
 }
 
@@ -182,7 +161,7 @@
     if (_spaceBetweenButtons != spaceBetweenButtons)
     {
         _spaceBetweenButtons = spaceBetweenButtons;
-        
+
         [self layoutSubviews];
     }
 }
@@ -192,7 +171,7 @@
     if (!UIEdgeInsetsEqualToEdgeInsets(_contentEdgeInsets, contentEdgeInsets))
     {
         _contentEdgeInsets = contentEdgeInsets;
-        
+
         [self layoutSubviews];
     }
 }
@@ -202,19 +181,19 @@
 - (void)setButtonsTitles:(NSArray *)titles forState:(UIControlState)state
 {
     BOOL isChanged = NO;
-    
+
     for (NSUInteger i=0; i<_buttons.count; i++)
     {
         LGRadioButton *button = _buttons[i];
-        
+
         if (![button.titleLabel.text isEqualToString:titles[i]])
         {
             [button setTitle:titles[i] forState:state];
-            
+
             isChanged = YES;
         }
     }
-    
+
     if (isChanged) [self layoutSubviews];
 }
 
@@ -227,15 +206,15 @@
 - (void)setButtonsImage:(UIImage *)image forState:(UIControlState)state
 {
     BOOL isChanged = NO;
-    
+
     for (LGRadioButton *button in _buttons)
     {
         if (!CGSizeEqualToSize(button.imageView.image.size, image.size))
             isChanged = YES;
-        
+
         [button setImage:image forState:state];
     }
-    
+
     if (isChanged) [self layoutSubviews];
 }
 
@@ -254,79 +233,79 @@
 - (void)setButtonsTitleFont:(UIFont *)font
 {
     BOOL isChanged = NO;
-    
+
     for (LGRadioButton *button in _buttons)
         if (![button.titleLabel.font isEqual:font])
         {
             button.titleLabel.font = font;
-            
+
             isChanged = YES;
         }
-    
+
     if (isChanged) [self layoutSubviews];
 }
 
 - (void)setButtonsImagePosition:(LGRadioButtonImagePosition)buttonsImagePosition
 {
     BOOL isChanged = NO;
-    
+
     for (LGRadioButton *button in _buttons)
         if (button.imagePosition != buttonsImagePosition)
         {
             button.imagePosition = buttonsImagePosition;
 
             button.contentHorizontalAlignment = (buttonsImagePosition == LGRadioButtonImagePositionLeft ? UIControlContentHorizontalAlignmentLeft : UIControlContentHorizontalAlignmentRight);
-            
+
             isChanged = YES;
         }
-    
+
     if (isChanged) [self layoutSubviews];
 }
 
 - (void)setButtonsTitlePosition:(LGRadioButtonTitlePosition)buttonsTitlePosition
 {
     BOOL isChanged = NO;
-    
+
     for (LGRadioButton *button in _buttons)
         if (button.titlePosition != buttonsTitlePosition)
         {
             button.titlePosition = buttonsTitlePosition;
 
             button.contentHorizontalAlignment = (buttonsTitlePosition == LGRadioButtonTitlePositionRight ? UIControlContentHorizontalAlignmentLeft : UIControlContentHorizontalAlignmentRight);
-            
+
             isChanged = YES;
         }
-    
+
     if (isChanged) [self layoutSubviews];
 }
 
 - (void)setButtonsImageSpacingFromTitle:(CGFloat)imageSpacingFromTitle
 {
     BOOL isChanged = NO;
-    
+
     for (LGRadioButton *button in _buttons)
         if (button.imageSpacingFromTitle != imageSpacingFromTitle)
         {
             button.imageSpacingFromTitle = imageSpacingFromTitle;
-            
+
             isChanged = YES;
         }
-    
+
     if (isChanged) [self layoutSubviews];
 }
 
 - (void)setButtonsTitleSpacingFromImage:(CGFloat)titleSpacingFromImage
 {
     BOOL isChanged = NO;
-    
+
     for (LGRadioButton *button in _buttons)
         if (button.titleSpacingFromImage != titleSpacingFromImage)
         {
             button.titleSpacingFromImage = titleSpacingFromImage;
-            
+
             isChanged = YES;
         }
-    
+
     if (isChanged) [self layoutSubviews];
 }
 
@@ -341,15 +320,15 @@
 - (void)setButtonsContentEdgeInsets:(UIEdgeInsets)contentEdgeInsets
 {
     BOOL isChanged = NO;
-    
+
     for (LGRadioButton *button in _buttons)
         if (!UIEdgeInsetsEqualToEdgeInsets(button.contentEdgeInsets, contentEdgeInsets))
         {
             button.contentEdgeInsets = contentEdgeInsets;
-            
+
             isChanged = YES;
         }
-    
+
     if (isChanged) [self layoutSubviews];
 }
 
@@ -416,14 +395,14 @@
     if (!button.isSelected)
     {
         [self deselectAllButtonsExept:button.tag];
-        
+
         button.selected = YES;
         button.userInteractionEnabled = NO;
-        
+
         _buttonSelected = button;
-        
+
         if (_actionHandler) _actionHandler(self, button.titleLabel.text, button.tag);
-        
+
         if (_delegate && [_delegate respondsToSelector:@selector(radioButtonsView:buttonPressedWithTitle:index:)])
             [_delegate radioButtonsView:self buttonPressedWithTitle:button.titleLabel.text index:button.tag];
     }
